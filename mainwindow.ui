@@ -611,7 +611,7 @@
     <property name="geometry">
      <rect>
       <x>270</x>
-      <y>20</y>
+      <y>30</y>
       <width>1081</width>
       <height>791</height>
      </rect>
@@ -672,8 +672,8 @@
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>70</y>
+       <x>20</x>
+       <y>80</y>
        <width>1041</width>
        <height>711</height>
       </rect>
@@ -682,7 +682,7 @@
       <bool>false</bool>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="page">
       <widget class="QLabel" name="label_12">
@@ -733,22 +733,6 @@
         <rect>
          <x>430</x>
          <y>160</y>
-         <width>501</width>
-         <height>61</height>
-        </rect>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(193, 236, 255);
-font: 12pt &quot;Times New Roman&quot;;
-border-radius: 20px;
-</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEdit_type">
-       <property name="geometry">
-        <rect>
-         <x>430</x>
-         <y>260</y>
          <width>501</width>
          <height>61</height>
         </rect>
@@ -895,13 +879,29 @@ border-radius: 20px;
         </item>
        </layout>
       </widget>
+      <widget class="QLineEdit" name="lineEdit_type">
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>260</y>
+         <width>501</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(193, 236, 255);
+font: 12pt &quot;Times New Roman&quot;;
+border-radius: 20px;
+</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="page_4">
       <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>10</y>
+         <x>10</x>
+         <y>-10</y>
          <width>1061</width>
          <height>701</height>
         </rect>
@@ -917,10 +917,59 @@ border-radius: 20px;
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>50</y>
-         <width>941</width>
-         <height>621</height>
+         <y>110</y>
+         <width>851</width>
+         <height>561</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="view_2">
+       <property name="geometry">
+        <rect>
+         <x>930</x>
+         <y>130</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>view</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>930</x>
+         <y>230</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>pdf</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="la_chercher_id">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>41</y>
+         <width>461</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="Boutton_rechecher">
+       <property name="geometry">
+        <rect>
+         <x>730</x>
+         <y>50</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>recherche</string>
        </property>
       </widget>
      </widget>
@@ -1074,7 +1123,7 @@ border-radius: 20px;
         <string>VIEW</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>110</x>

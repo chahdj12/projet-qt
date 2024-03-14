@@ -33,7 +33,9 @@ public:
     bool ajouter();
     QSqlQueryModel *afficher();
     bool supprimer(int idDon);
+bool mod(int idDon);
 
+QSqlQueryModel* chercher_id(int iDdon);
 
 
 

@@ -5,6 +5,22 @@
 #include <QMessageBox>
 #include "mainwindow.h"
 #include "associations.h"
+
+
+#include <QMessageBox>
+#include <QIntValidator>
+#include <QPlainTextEdit>
+#include <QTextStream>
+#include <QPainter>
+#include <QTextStream>
+#include <QSqlQuery>
+#include<QPixmap>
+#include<QListWidget>
+#include <QPdfWriter>
+#include <QFile>
+#include <QCoreApplication>
+#include <QDesktopServices>
+
 #include <QSqlQuery>
 
 
@@ -152,49 +168,9 @@ MainWindow::~MainWindow()
 }
 
 
-void MainWindow::on_modifier_clicked()
-{
 
 
 
-    associations E1;
-    E1.setIdDon((ui->lineEdit_2->text().toInt()));
-         bool test=E1.supprimer(E1.getIdDon());
-        if(!test){
-            QMessageBox::critical(nullptr, QObject::tr("nope"),
-                        QObject::tr("update failed.\n"
-                                    "Click Cancel to exit."), QMessageBox::Cancel);
-
-
-
-        }
-        else
-        {
-            int idDon = ui->lineEdit_2->text().toInt();
-                QString type = ui->type->text();
-                QString destinataire = ui->ress->text();
-                float montant = ui->price->text().toFloat();
-                int idOeuvre = ui->idou->text().toInt();
-
-
-
-                associations assoc(idDon,type,destinataire,montant,idOeuvre);
-
-          bool test1=E.ajouter();
-          if(assoc.ajouter()) {
-                 QMessageBox::information(this, "Succès", "Association update avec succès.");
-                 // Réafficher la liste après l'ajout
-                 //assoc.afficher();+
-                 ui->tableView->setModel(E.afficher());
-
-             } else {
-                 QMessageBox::critical(this, "Erreur", "Erreur lors de l'ajout de l'association.");
-             }
-
-    }
-}
-
-// si ahmed
 
  /*   int idDon = ui->lineEdit_2->text().toInt();
         QString type = ui->type->text();
@@ -228,7 +204,8 @@ void MainWindow::on_modifier_clicked()
 void MainWindow::on_supprimer_clicked()
 {
 
-    associations E1;E1.setIdDon((ui->lineEdit_2->text().toInt()));
+    associations E1;
+    E1.setIdDon((ui->lineEdit_2->text().toInt()));
         bool test=E1.supprimer(E1.getIdDon());
 
         QMessageBox msgBox;
@@ -238,7 +215,7 @@ void MainWindow::on_supprimer_clicked()
             QMessageBox::information(nullptr, QObject::tr("ok"),
                         QObject::tr("Suppression effectué.\n"
                                    "Click Cancel to exit."), QMessageBox::Cancel);
-            ui->tableView->setModel(E.afficher());
+            ui->tableView_2->setModel(E.afficher());
         }
         else
             QMessageBox::critical(nullptr, QObject::tr("not ok"),
@@ -246,4 +223,100 @@ void MainWindow::on_supprimer_clicked()
                                     "Click Cancel to exit."), QMessageBox::Cancel);
 
 
+}
+
+void MainWindow::on_modifier_clicked()
+{
+    int idDon = ui->lineEdit_2->text().toInt();
+        QString type = ui->type->text();
+        QString destinataire = ui->ress->text();
+        float montant = ui->price->text().toFloat();
+        int idOeuvre = ui->idou->text().toInt();
+    associations assoc(idDon,type,destinataire,montant,idOeuvre);
+    bool test=assoc.mod(idDon);
+    if(test)
+       {
+
+                   QMessageBox::information(nullptr, QObject::tr("ok"),
+                               QObject::tr("update successful.\n"
+                                           "update effectuer."), QMessageBox::Cancel);
+                   ui->tableView_2->setModel(E.afficher());
+
+
+
+       }
+               else
+
+                   QMessageBox::critical(nullptr, QObject::tr("nope"),
+                               QObject::tr("connection failed.\n"
+                                           "Click Cancel to exit."), QMessageBox::Cancel);
+           }
+
+
+
+
+void MainWindow::on_afficher_clicked()
+{
+      ui->tableView_2->setModel(E.afficher());
+
+}
+
+void MainWindow::on_view_2_clicked()
+{
+    ui->tableView->setModel(E.afficher());
+
+
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    QPdfWriter pdf("C:/Users/USER/OneDrive/Bureau/ASSOCIATIONS.pdf");
+
+              QPainter painter(&pdf);
+              int i = 4000;
+                     painter.setPen(Qt::darkCyan);
+                     painter.setFont(QFont("Time New Roman", 25));
+                     painter.drawText(3000,1400,"ASSOCIATIONS");
+                     painter.setPen(Qt::black);
+                     painter.setFont(QFont("Time New Roman", 15));
+                     painter.drawRect(100,100,9400,2500);
+                     painter.drawRect(100,3000,9400,500);
+                     painter.setFont(QFont("Time New Roman", 9));
+                     painter.drawText(4400,3300," IDDON");
+                     painter.drawText(400,3300,"TYPE");
+                     painter.drawText(1350,3300,"DES");
+                     painter.drawText(2200,3300,"MONT");
+                     painter.drawText(3400,3300,"OV");
+
+
+                     painter.drawRect(100,3000,9400,9000);
+
+                     QSqlQuery query;
+                     query.prepare("select * from ASSOCIATIONS");
+                     query.exec();
+                     while (query.next())
+                     {
+
+                         painter.drawText(1350,i,query.value(1).toString());
+                         painter.drawText(2300,i,query.value(2).toString());
+                         painter.drawText(3400,i,query.value(3).toString());
+                         painter.drawText(4400,i,query.value(4).toString());
+                         painter.drawText(6200,i,query.value(5).toString());
+                         painter.drawText(6200,i,query.value(6).toString());
+
+
+
+
+                        i = i + 350;
+                     }
+                     QMessageBox::information(this, QObject::tr("PDF Saved Successfuly!"),
+                     QObject::tr("PDF Saved Successfuly!.\n" "Click Cancel to exit."), QMessageBox::Cancel);
+    }
+
+
+
+void MainWindow::on_Boutton_rechecher_clicked()
+{
+   int idDon = ui->la_chercher_id->text().toInt();
+        ui->tableView->setModel(E.chercher_id(idDon));
 }

@@ -55,10 +55,45 @@ QSqlQueryModel* associations::afficher() {
  return model;
 }
 
-bool associations::supprimer(int id) {
-    QSqlQuery query;
-    query.prepare("DELETE FROM ASSOCIATIONS WHERE idDon = :idDon");
-    query.bindValue(":idDon", id);
+
+bool associations::mod(int idDon){
+QSqlQuery query;
+
+ QString res=QString::number(idDon);
+ QString chahd =QString::number(idOeuvre);
+  QString lila =QString::number(montant);
+        query.prepare("UPDATE ASSOCIATIONS SET TYPE=:TYPE, DESTINATAIRE=:DESTINATAIRE, MONTANT=:MONTANT, IDOEUVRE =:IDOEUVRE  where idDon=:IDDON ");
+        query.bindValue(":IDDON", res);
+        query.bindValue(":TYPE", type);
+        query.bindValue(":DESTINATAIRE", destinataire);
+        query.bindValue(":MONTANT", lila);
+        query.bindValue(":IDOEUVRE", chahd);
     return query.exec();
 }
+bool associations::supprimer(int idDon) {
+    QSqlQuery query;
 
+       query.prepare("delete from ASSOCIATIONS where idDon=:IDDON");
+
+       query.bindValue(":IDDON", idDon);
+       query.bindValue(":TYPE", type);
+       query.bindValue(":DESTINATAIRE", destinataire);
+       query.bindValue(":MONTANT", montant);
+       query.bindValue(":IDOEUVRE", idOeuvre);
+       return  query.exec();
+}
+
+
+
+QSqlQueryModel* associations::chercher_id(int idDon)
+ {
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("SELECT * FROM ASSOCIATIONS WHERE IDDON = " + QString::number(idDon));
+
+     model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDDON"));
+     model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE"));
+     model->setHeaderData(2, Qt::Horizontal, QObject::tr("DESTINATAIRE"));
+     model->setHeaderData(3, Qt::Horizontal, QObject::tr("MONTANT"));
+     model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDOEUVRE"));
+     return model;
+}
