@@ -10,6 +10,9 @@ CONFIG += c++11
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+QT += sql
+QT += multimedia
+
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -21,16 +24,20 @@ SOURCES += \
     connexion.cpp \
     customwidget.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    notification.cpp \
+    smtp.cpp
 
 HEADERS += \
     associations.h \
     connexion.h \
     customwidget.h \
-    mainwindow.h
+    mainwindow.h \
+    notification.h \
+    smtp.h
 
 FORMS += \
-    mainwindow.ui \
+    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

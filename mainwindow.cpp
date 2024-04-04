@@ -6,6 +6,8 @@
 #include "mainwindow.h"
 #include "associations.h"
 
+#include <QDebug>
+//#include <QtCharts>
 
 #include <QMessageBox>
 #include <QIntValidator>
@@ -20,16 +22,64 @@
 #include <QFile>
 #include <QCoreApplication>
 #include <QDesktopServices>
-
+#include "smtp.h"
 #include <QSqlQuery>
+#include "notification.h"
+#include <QSound>
+
+#include <QTextDocument>
+#include <QTextTable>
+#include <QTextCursor>
+#include <QDebug>
 
 
 
+
+
+#include <QMessageBox>
+#include <QDate>
+#include <QRegularExpression>
+#include <QUuid>
+#include <QDebug>
+#include <QFileDialog>
+#include <QDir>
+#include <QStandardItemModel>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QFile>
+#include <QTextStream>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QFile>
+#include <QTextStream>
+#include <QSqlRecord>
+#include <QSqlQueryModel>
+#include <QSqlRecord>
+
+#include <QSqlError>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtWidgets/QDialog>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QPushButton>
+#include <QPainter>
+
+
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QPieSlice>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+//////////////////////////
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    connect(ui->comboBox, SIGNAL(currentTextChanged(const QString&)), this, SLOT(on_comboBox_currentTextChanged(const QString&)));
     ui->icon_only->setVisible(false);
 
  ui->lineEdit_idDon->setValidator( new QIntValidator(0, 9999, this));
@@ -120,7 +170,7 @@ void MainWindow::navigateToPage()
 }*/
 
 
-void MainWindow::on_pushButton_ajouter_clicked()
+/*void MainWindow::on_pushButton_ajouter_clicked()
 {int idDon = ui->lineEdit_idDon->text().toInt();
     QString type = ui->lineEdit_type->text();
     QString destinataire = ui->lineEdit_destinataire->text();
@@ -132,6 +182,39 @@ associations assoc(idDon,type,destinataire,montant,idOeuvre);
            // Réafficher la liste après l'ajout
            //assoc.afficher();+
            ui->tableView->setModel(E.afficher());
+
+       } else {
+           QMessageBox::critical(this, "Erreur", "Erreur lors de l'ajout de l'association.");
+       }
+
+}*/
+void MainWindow::on_pushButton_ajouter_clicked()
+
+
+
+{
+    QSound *sound = new QSound("C:/Users/USER/OneDrive/Documents/chart/media/button.wav"); // Replace "click.wav" with the actual sound file path
+       sound->play();
+
+int idDon = ui->lineEdit_idDon->text().toInt();
+    QString type = ui->lineEdit_type->text();
+    QString destinataire = ui->lineEdit_destinataire->text();
+    float montant = ui->lineEdit_montant->text().toFloat();
+    int idOeuvre = ui->lineEdit_idOeuvre->text().toInt();
+associations assoc(idDon,type,destinataire,montant,idOeuvre);
+    if(assoc.ajouter()) {
+           QMessageBox::information(this, "Succès", "Association ajoutée avec succès.");
+           // Réafficher la liste après l'ajout
+           //assoc.afficher();+
+           ui->tableView->setModel(E.afficher());
+
+  notif.notifAjouterMateriels();
+    ui->lineEdit_idDon->clear();
+    ui->lineEdit_type->clear();
+   // ui->comboBox_etat->clear();
+    ui->lineEdit_montant->clear();
+     ui->lineEdit_idOeuvre->clear();
+ui->lineEdit_destinataire->clear();
 
        } else {
            QMessageBox::critical(this, "Erreur", "Erreur lors de l'ajout de l'association.");
@@ -216,6 +299,7 @@ void MainWindow::on_supprimer_clicked()
                         QObject::tr("Suppression effectué.\n"
                                    "Click Cancel to exit."), QMessageBox::Cancel);
             ui->tableView_2->setModel(E.afficher());
+          notif.notifSupprimerMatereils();
         }
         else
             QMessageBox::critical(nullptr, QObject::tr("not ok"),
@@ -227,6 +311,10 @@ void MainWindow::on_supprimer_clicked()
 
 void MainWindow::on_modifier_clicked()
 {
+
+    QSound *sound = new QSound("C:/Users/USER/OneDrive/Documents/chart/media/button.wav"); // Replace "click.wav" with the actual sound file path
+       sound->play();
+
     int idDon = ui->lineEdit_2->text().toInt();
         QString type = ui->type->text();
         QString destinataire = ui->ress->text();
@@ -241,6 +329,7 @@ void MainWindow::on_modifier_clicked()
                                QObject::tr("update successful.\n"
                                            "update effectuer."), QMessageBox::Cancel);
                    ui->tableView_2->setModel(E.afficher());
+                   notif.notifModifierMateriels();
 
 
 
@@ -315,8 +404,150 @@ void MainWindow::on_pushButton_2_clicked()
 
 
 
-void MainWindow::on_Boutton_rechecher_clicked()
+/*void MainWindow::on_Boutton_rechecher_clicked()
 {
    int idDon = ui->la_chercher_id->text().toInt();
         ui->tableView->setModel(E.chercher_id(idDon));
+}*/
+
+void MainWindow::on_comboBox_currentTextChanged(const QString &text)
+{
+    QString searchText = ui->la_chercher_id->text(); // Get the search text from the line edit
+
+    if (text == "ID_Don") {
+        bool ok;
+        int idDon = searchText.toInt(&ok); // Convert the search text to an integer
+        if (ok) {
+            ui->tableView->setModel(E.chercher_id(idDon)); // Call the function to search by ID
+        } else {
+            qDebug() << "Invalid ID entered.";
+            // Optionally, you can display an error message to the user
+        }
+    } else if (text == "recipient") {
+        ui->tableView->setModel(E.chercher_destinataire(searchText)); // Call the function to search by recipient
+    } else if (text == "type") {
+        ui->tableView->setModel(E.chercher_type(searchText)); // Call the function to search by type
+    } else {
+        qDebug() << "Unsupported search option:" << text;
+        // Optionally, you can display an error message to the user
+    }
 }
+
+
+
+void MainWindow::on_sort_clicked()
+{
+    ui->tab->setModel(E.tri_montant());
+}
+
+
+
+/*void MainWindow::on_stat_clicked()
+{
+
+        float totalDon = E.getTotalDonationsAmount();
+
+        // Vérifier si le montant total est valide
+        if (totalDon >= 0.0f) {
+            // Configuration de la valeur maximale de la barre de progression
+            float montantMaxTotal = 1000000.0f; // Par exemple, un million de dollars
+            ui->progressBar->setMaximum(100); // ou toute autre valeur appropriée
+            // Conversion du montant total en pourcentage pour la barre de progression
+            int pourcentage = static_cast<int>((totalDon / montantMaxTotal) * 100); // Utilisation de la valeur maximale définie
+            // Mise à jour de la valeur de la barre de progression
+            ui->progressBar->setValue(pourcentage);
+        } else {
+            // Gestion de l'erreur lors de l'obtention du montant total
+            QMessageBox::critical(this, "Erreur", "Impossible d'obtenir le montant total des dons.");
+        }
+    }*/
+void MainWindow::on_stat_clicked() {
+    // Retrieve all donation amounts from the database
+    QList<float> donationAmounts = E.getAllDonationsAmounts();
+
+    // Calculate the total sum of donations
+    float totalDon = std::accumulate(donationAmounts.begin(), donationAmounts.end(), 0.0f);
+
+    // Configure the maximum value of the progress bar
+    const float montantMaxTotal = 1000000.0f; // For example, one million dollars
+    const int maxProgressBarValue = 100; // Maximum value for the progress bar
+
+    // Calculate the percentage of total donations relative to the maximum total amount
+    int pourcentage = static_cast<int>((totalDon / montantMaxTotal) * maxProgressBarValue);
+
+    // Ensure the percentage is within the valid range [0, 100]
+    if (pourcentage < 0) {
+        pourcentage = 0;
+    } else if (pourcentage > maxProgressBarValue) {
+        pourcentage = maxProgressBarValue;
+    }
+
+    // Update the value of the progress bar
+    ui->progressBar->setValue(pourcentage);
+}
+
+
+
+
+
+
+
+
+/*void MainWindow::on_on_send_email_clicked()
+{
+    // Retrieve information from QLineEdit widgets
+    QString emailAddress = ui->email->text();
+    QString subject = ui->sujet->text();
+    QString body = ui->objet->text();
+
+    // Check for empty fields
+    if (emailAddress.isEmpty() || subject.isEmpty() || body.isEmpty()) {
+        QMessageBox::warning(this, "Champs vides", "Veuillez remplir tous les champs avant d'envoyer l'email.");
+        return;
+    }
+
+    // Create an instance of the Smtp class
+    Smtp* smtp = new Smtp("said.doghri@esprit.tn", "221JMT7702", "smtp.gmail.com", 465);
+
+    // Compose the email
+    QStringList attachments;  // Add file paths if you have attachments
+
+    // Set the sender and recipient email addresses
+    QString senderEmail = "said.doghri@esprit.tn";  // Replace with your sender email
+    QString senderName = "said";
+    QString recipientEmail = emailAddress;
+    QString recipientName = "entreprise";
+
+    // Set the email subject and body
+    QString emailSubject = subject;
+    QString emailBody = body;
+
+    // Connect the status signal to a lambda function
+    connect(smtp, &Smtp::status, [this](QString status) {
+        // Disconnect the status signal
+        QObject::disconnect(sender(), SIGNAL(status(QString)), this, SLOT(mailSent(QString)));
+
+
+    });
+
+    // Send the email
+    smtp->sendMail(senderEmail, recipientEmail, emailSubject, emailBody, attachments);
+    //QMessageBox::information(this, "Email réussie", "Email envoyé.");
+
+}*/
+
+
+void MainWindow::on_don_clicked() {
+    associations E;
+
+        associations chahed = E.getHighestDonation();
+        chahed=E.getHighestDonation();
+        int newsuivi=chahed.getMontant();
+
+            QString newsuivi_string=QString::number(newsuivi);
+            QString m="L'don du mois est  " +  newsuivi_string + " with Destinataire   " + chahed.getDestinataire()  +"  "+"\n"+ "!   this type of donnation wins a free membership for our next event" +"  "+  chahed.getType() + " "+ "DT";
+
+                ui->la_msg_emp_mois->setText(m);
+
+}
+

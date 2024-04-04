@@ -3,9 +3,12 @@
 #include <QDebug>
 #include <iostream>
 #include <QSqlQueryModel>
-
+#include <QList>
 using namespace std;
 #include <QString>
+#include <QtSql/QSqlError>
+#include <stdexcept>
+
 
 associations::associations(){
          idDon= 0;
@@ -96,4 +99,85 @@ QSqlQueryModel* associations::chercher_id(int idDon)
      model->setHeaderData(3, Qt::Horizontal, QObject::tr("MONTANT"));
      model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDOEUVRE"));
      return model;
+}
+QSqlQueryModel* associations::chercher_destinataire(QString destinataire)
+ {
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("SELECT * FROM ASSOCIATIONS WHERE DESTINATAIRE LIKE '%" + destinataire + "%'");
+     model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDDON"));
+     model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE"));
+     model->setHeaderData(2, Qt::Horizontal, QObject::tr("DESTINATAIRE"));
+     model->setHeaderData(3, Qt::Horizontal, QObject::tr("MONTANT"));
+     model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDOEUVRE"));
+     return model;
+}
+QSqlQueryModel* associations::chercher_type( QString type)
+{
+   QSqlQueryModel * model= new QSqlQueryModel();
+     model->setQuery("SELECT * FROM ASSOCIATIONS WHERE TYPE LIKE '%" + type + "%'");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDDON"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("DESTINATAIRE"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("MONTANT"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDOEUVRE"));
+    return model;
+}
+QSqlQueryModel* associations::tri_montant()
+{
+   QSqlQueryModel * model= new QSqlQueryModel();
+     model->setQuery("SELECT * FROM ASSOCIATIONS ORDER BY MONTANT ASC");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("IDDON"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("TYPE"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("DESTINATAIRE"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("MONTANT"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("IDOEUVRE"));
+    return model;
+}
+/*float associations::getTotalDonationsAmount(){
+    QSqlQuery query;
+        query.prepare("SELECT SUM(MONTANT) FROM ASSOCIATIONS");
+        float totalDon = 0.0f;
+            if (query.next()) {
+                totalDon = query.value(0).toFloat();
+            }
+
+            return totalDon;
+
+}*/
+QList<float> associations::getAllDonationsAmounts() {
+    QList<float> donationAmounts; // List to store all donation amounts
+
+    QSqlQuery query("SELECT MONTANT FROM ASSOCIATIONS");
+    while (query.next()) {
+        float donationAmount = query.value(0).toFloat(); // Get each donation amount
+        donationAmounts.append(donationAmount); // Append it to the list
+    }
+
+    return donationAmounts;
+}
+associations associations::getHighestDonation() {
+    QSqlQuery query;
+             query.prepare("SELECT * FROM ASSOCIATIONS ORDER BY MONTANT DESC ");
+
+             if (!query.exec()) {
+                 qDebug() << "Erreur :" << query.lastError().text();
+                 return associations();
+             }
+
+             if (query.next()) {
+                 int idDon = query.value(0).toInt();
+                 QString type = query.value(1).toString();
+                 QString destinataire = query.value(2).toString();
+                 float montant = query.value(3).toFloat();
+                     int idOeuvre = query.value(4).toInt();
+
+
+
+                 associations chahed(idDon, type,destinataire,montant,idOeuvre); // Assurez-vous d'inclure toutes les informations nécessaires
+                 return chahed;
+             } else {
+                 qDebug() << "Aucun employé trouvé.";
+
+                 return associations();
+             }
 }

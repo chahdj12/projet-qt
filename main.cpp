@@ -2,6 +2,7 @@
 #include "connexion.h"
 #include <QApplication>
 #include <QMessageBox>
+//#include <QtCharts>7
 
 int main(int argc, char *argv[])
 {

@@ -34,8 +34,16 @@ public:
     QSqlQueryModel *afficher();
     bool supprimer(int idDon);
 bool mod(int idDon);
-
 QSqlQueryModel* chercher_id(int iDdon);
+QSqlQueryModel* chercher_destinataire(QString destinataire);
+QSqlQueryModel* chercher_type(QString type);
+QSqlQueryModel* tri_montant();
+ float getTotalDonationsAmount();
+ QList<float> getAllDonationsAmounts() ;
+ float donofmonth();
+ associations getHighestDonation() ;
+ void insertCalendar();
+
 
 
 
