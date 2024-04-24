@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/back">
+        <file>backprj.png</file>
+        <file>421525424_1539931383656472_8078008905184343449_n.png</file>
+        <file>logo.qrc</file>
+    </qresource>
+</RCC>

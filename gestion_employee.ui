@@ -1,0 +1,832 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>gestion_employee</class>
+ <widget class="QMainWindow" name="gestion_employee">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1285</width>
+    <height>722</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLineEdit" name="le_name">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>220</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>220</y>
+      <width>121</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Name </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_last_name">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>250</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>56</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Role</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_10">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>400</y>
+      <width>56</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Salary </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>20</y>
+      <width>161</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>list</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_id">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>180</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>190</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ID employee</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_salary">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>390</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_pdf">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>610</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>PDF</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>30</y>
+      <width>121</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/logo++.png);
+image: url(:/logo/logo++.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_state">
+    <property name="geometry">
+     <rect>
+      <x>1120</x>
+      <y>300</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Statistics</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_ajouter">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>580</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>add employee</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>350</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Adress </string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_find">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>610</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Find</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>260</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Last name </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_12">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>480</y>
+      <width>91</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Work hours </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>330</y>
+      <width>56</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>E-mail</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_8">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>600</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Reset password</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="tab_employe_2">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>370</y>
+      <width>851</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_supprimer">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>300</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_email">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>320</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_phone_number">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>290</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_modifier">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>580</y>
+      <width>151</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>update employee</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_11">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>440</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Hiring date </string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_13">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>300</y>
+      <width>111</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Phone number </string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_adress">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>350</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QTableView" name="tab_employe">
+    <property name="geometry">
+     <rect>
+      <x>410</x>
+      <y>60</y>
+      <width>851</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>-60</x>
+      <y>-10</y>
+      <width>1401</width>
+      <height>751</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/back/backprj.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>0</y>
+      <width>341</width>
+      <height>691</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/back/421525424_1539931383656472_8078008905184343449_n.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_hiring_date">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>440</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_work_hours">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>480</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="le_role">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>520</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit {
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 0 8px;
+
+background: white;
+
+font-weight: bold; /* Le texte est en gras */
+
+}</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pb_slot">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>300</y>
+      <width>141</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+   background-color: #fff;
+   border: none;
+   color: #333;
+   padding: 10px 20px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 14px;
+   margin: 4px 2px;
+   cursor: pointer;
+   border-radius: 16px;
+
+}
+
+QPushButton:hover {
+   background-color: #EF829B;
+}
+QPushButton:pressed
+{
+    background-color: rgb(255, 180, 5);
+    border: 1px solid white;
+}</string>
+    </property>
+    <property name="text">
+     <string>slot</string>
+    </property>
+   </widget>
+   <zorder>label</zorder>
+   <zorder>label_2</zorder>
+   <zorder>le_name</zorder>
+   <zorder>label_6</zorder>
+   <zorder>le_last_name</zorder>
+   <zorder>label_14</zorder>
+   <zorder>label_10</zorder>
+   <zorder>label_5</zorder>
+   <zorder>le_id</zorder>
+   <zorder>label_4</zorder>
+   <zorder>le_salary</zorder>
+   <zorder>pb_pdf</zorder>
+   <zorder>label_3</zorder>
+   <zorder>pb_state</zorder>
+   <zorder>pb_ajouter</zorder>
+   <zorder>label_8</zorder>
+   <zorder>pb_find</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_12</zorder>
+   <zorder>label_9</zorder>
+   <zorder>pushButton_8</zorder>
+   <zorder>tab_employe_2</zorder>
+   <zorder>pb_supprimer</zorder>
+   <zorder>le_email</zorder>
+   <zorder>le_phone_number</zorder>
+   <zorder>pb_modifier</zorder>
+   <zorder>label_11</zorder>
+   <zorder>label_13</zorder>
+   <zorder>le_adress</zorder>
+   <zorder>tab_employe</zorder>
+   <zorder>le_hiring_date</zorder>
+   <zorder>le_work_hours</zorder>
+   <zorder>le_role</zorder>
+   <zorder>pb_slot</zorder>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1285</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
